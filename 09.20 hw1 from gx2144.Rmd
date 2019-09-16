@@ -137,7 +137,7 @@ ggplot(df_2, aes(x = x,y = y,color = df_2$vec_factor1,)) + geom_point()+
 ggsave("Scatter plot3 for hw1.pdf")
 
 ```
-## Comments on the color scales
+
 
 
 
