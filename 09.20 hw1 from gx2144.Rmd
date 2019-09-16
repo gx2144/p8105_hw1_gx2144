@@ -137,6 +137,7 @@ ggplot(df_2, aes(x = x,y = y,color = df_2$vec_factor1,)) + geom_point()+
 ggsave("Scatter plot3 for hw1.pdf")
 
 ```
+## Comments on color points
 
 * When the data type is logical, it shows two colors indicating the "TRUE" and "FALSE" logical outcomes.
 
