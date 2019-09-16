@@ -139,13 +139,6 @@ ggsave("Scatter plot3 for hw1.pdf")
 ```
 ## Comments on color points
 
-* When the data type is logical, it shows two colors indicating the "TRUE" and "FALSE" logical outcomes.
-
-* When the data type is numerical, the scale on the right side using different blue colors to differenciate numbers. 
-since TRUE=1, FALSE=0, the color points have only two colors indicating 1 and 0.
-
-* When the data types is factor, the color points represent "TRUE" and "FALSE" factor in blue and red.
-
 
 
 
