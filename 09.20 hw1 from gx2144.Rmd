@@ -16,7 +16,7 @@ library(tidyverse)
 
 ```{r problem1,  warning = FALSE}
 df_1 = tibble(
-   samp = rnorm(8),  
+   samp = rnorm(8), 
    # a random sample of size 8 from a standard Normal distribution  
    vec_logical = samp > 0, 
    #a logical vector indicating whether elements of the sample are greater than 0
@@ -30,32 +30,32 @@ df_1 = tibble(
 ## Take mean of each variable in the dataframe
 * Mean of random sample:
 ```{r} 
-mean(df_1$samp) ## works, data is numerical
+mean（pull(df_1,samp)) ## works, data is numerical
 ```
 * Mean of logical vector:
 ```{r}
-mean(df_1$vec_logical) ## works, TRUE = 1 and FALSE = 0
+mean(pull(df_1,vec_logical)) ## works, TRUE = 1 and FALSE = 0
 ```
 * Mean of character vector: 
-```{r}
-mean(df_1$vec_char) ## does not work,data is not numerical
+```{r , warning = FALSE}
+mean(pull(df_1,vec_char)) ## does not work,data is not numerical
 ```
 * Mean of factor vector: 
-```{r}
-mean(df_1$vec_factor) ## does not work,data is not numerical
+```{r , warning = FALSE}
+mean(pull(df_1,vec_factor)) ## does not work,data is not numerical
 ```
 
 
 
 
 ```{r change data type,results ='hide', warning=FALSE}
-as.numeric(df_1$samp) 
+as.numeric(pull(df_1,samp)) 
 ## works, random sample is composed of numeric data
-as.numeric(df_1$vec_logical) 
+as.numeric(pull(df_1,vec_logical)) 
 ## works, TRUE = 1 and FALSE = 0
-as.numeric(df_1$vec_char) 
+as.numeric(pull(df_1,vec_char)) 
 ## characters cannot be transformed into numeric data
-as.numeric(df_1$vec_factor) 
+as.numeric(pull(df_1,vec_factor)) 
 ## The levels of a factor are stored as character data type, but transforming factor into numeric data is meaningless
 ```
 
@@ -63,17 +63,17 @@ as.numeric(df_1$vec_factor)
 
 * convert the logical vector to numeric,and multiply the random sample by the result
 ```{r, warning = FALSE}
-(as.numeric(df_1$vec_logical)) *(df_1$samp) 
+(as.numeric(pull(df_1,vec_logical))) *(pull(df_1,samp)) 
 ```
 
 * convert the logical vector to logical,and multiply the random sample by the result
 ```{r}
-(as.factor(df_1$vec_logical)) * (df_1$samp) ##factors cannot be multiplied
+(as.factor(pull(df_1,vec_logical))) * (pull(df_1,samp)) ##factors cannot be multiplied
 ```
 
 * convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
 ```{r}
-(as.numeric(as.factor(df_1$vec_logical))) * (df_1$samp)
+(as.numeric(as.factor(pull(df_1,vec_logical))) )* (pull(df_1,samp))
 ## numerics are 2,1,2,2,1,1,2,1
 ```
 
@@ -103,34 +103,34 @@ ncol(df_2)
 ```
 * Mean of x: 
 ```{r}
-mean(df_2$x)
+mean(pull(df_2,x))
 ```
 * Median of x:
 ```{r}
-median(df_2$x)
+median(pull(df_2,x))
 ```
 * Standard diviation of x:  
 ```{r}
-sd(df_2$x, na.rm = FALSE)
+sd(pull(df_2,x), na.rm = FALSE)
 ```
 * proportion of cases for which x + y > 1: 
 ```{r}
-sum(df_2$vec_logical1 == TRUE) / (sum(df_2$vec_logical1 == FALSE) + sum(df_2$vec_logical1 == TRUE))
+sum(pull(df_2,vec_logical1) == TRUE) / (sum(pull(df_2,vec_logical1) == FALSE) + sum(pull(df_2,vec_logical1) == TRUE))
 ```
 
 
 # Make a scatterplot
 ```{r}
-ggplot(df_2, aes(x = x,y = y,color = df_2$vec_logical1,)) + geom_point()+
+ggplot(df_2, aes(x = x,y = y,color = pull(df_2,vec_logical1),)) + geom_point()+
   labs(title="y vs x;color points using the logical variables", x="random(500)", y = "random(500)")+
   theme_classic()  
 ggsave("Scatter plot1 for hw1.pdf")
-ggplot(df_2, aes(x = x,y = y,color = df_2$vec_numerical1,)) + geom_point()+
+ggplot(df_2, aes(x = x,y = y,color = pull(df_2,vec_logical1),)) + geom_point()+
   labs(title="y vs x;color points using the numeric variables",
 x="random(500)", y = "random(500)")+
   theme_classic()  
 ggsave("Scatter plot2 for hw1.pdf")
-ggplot(df_2, aes(x = x,y = y,color = df_2$vec_factor1,)) + geom_point()+
+ggplot(df_2, aes(x = x,y = y,color = pull(df_2,vec_logical1),)) + geom_point()+
   labs(title="y vs x;color points using the factor variables",
        x="random(500)", y = "random(500)")+
   theme_classic() 
